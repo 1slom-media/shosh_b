@@ -1,0 +1,98 @@
+import { Router } from "express";
+import filial from "../controller/filial";
+import rooms from "../controller/rooms";
+import staff from "../controller/staff";
+import consumption_category from "../controller/consumption_category";
+import consumption from "../controller/consumption";
+import lids from "../controller/lids";
+import orders from "../controller/orders";
+import users from "../controller/users";
+import services from "../controller/services";
+import products from "../controller/products";
+import services_orders from "../controller/services_orders";
+
+
+const router=Router()
+
+// filials rout
+router.get("/filials",filial.Get);
+router.get("/filials/:id",filial.GetId);
+router.post("/filials",filial.Post);
+router.put("/filials/:id",filial.Put);
+router.delete("/filials/:id",filial.Delete);
+
+// staff rout
+router.get("/staff",staff.Get);
+router.get("/staff/:id",staff.GetId);
+router.post("/staff",staff.Post);
+router.post("/login",staff.SignIn);
+
+// rooms rout
+router.get("/rooms",rooms.Get);
+router.get("/emptyrooms",rooms.GetEmpty);
+router.get("/rooms/:id",rooms.GetId);
+router.post("/rooms",rooms.Post);
+router.put("/rooms/:id",rooms.Put);
+router.delete("/rooms/:id",rooms.Delete);
+
+// consumption_category rout
+router.get("/consumption_category",consumption_category.Get);
+router.get("/consumption_category/:id",consumption_category.GetId);
+router.post("/consumption_category",consumption_category.Post);
+router.put("/consumption_category/:id",consumption_category.Put);
+router.delete("/consumption_category/:id",consumption_category.Delete);
+
+// consumption rout
+router.get("/consumption",consumption.Get);
+router.get("/consumption/:id",consumption.GetId);
+router.post("/consumption",consumption.Post);
+router.put("/consumption/:id",consumption.Put);
+router.delete("/consumption/:id",consumption.Delete);
+
+// Lids rout
+router.get("/lids",lids.Get);
+router.get("/newlids",lids.GetNew);
+router.get("/lids/:id",lids.GetId);
+router.post("/lids",lids.Post);
+router.put("/lids/:id",lids.Put);
+router.delete("/lids/:id",lids.Delete);
+
+// orders rout
+router.get("/orders",orders.Get);
+router.get("/ordersbusy",orders.GetBusy);
+router.get("/orders/:id",orders.GetId);
+router.post("/orders",orders.Post);
+router.put("/orders/:id",orders.Put);
+router.delete("/orders/:id",orders.Delete);
+
+// users rout
+router.get("/users",users.Get);
+router.get("/users/:id",users.GetId);
+router.post("/users",users.Post);
+router.put("/users/:id",users.Put);
+router.delete("/users/:id",users.Delete);
+
+// services rout
+router.get("/services",services.Get)
+router.get("/services/:id",services.GetId)
+router.post("/services",services.Post)
+router.put("/services/:id",services.Put)
+router.delete("/services/:id",services.Delete)
+
+// products rout
+router.get("/products",products.Get)
+router.get("/products/:id",products.GetId)
+router.post("/products",products.Post)
+router.put("/products/:id",products.Put)
+router.delete("/products/:id",products.Delete)
+
+// services_orders
+router.get("/services_orders",services_orders.Get)
+router.get("/services_orders/:id",services_orders.GetId)
+router.post("/services_orders",services_orders.Post)
+router.put("/services_orders/:id",services_orders.Put)
+router.delete("/services_orders/:id",services_orders.Delete)
+
+
+
+export default router;
