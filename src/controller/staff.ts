@@ -74,21 +74,29 @@ class StaffController {
                     filial: true
                 }, where: { email }
             })
-
-            if (await compare(password, foundStaff.password) == true) {
-                return res.json({
-                    status: 200,
-                    message: "STAFF login successful",
-                    token: sign({ id: foundStaff.id }),
-                    data: foundStaff
-                })
-            } else {
+            if(foundStaff){
+                if (await compare(password, foundStaff.password) == true) {
+                    return res.json({
+                        status: 200,
+                        message: "STAFF login successful",
+                        token: sign({ id: foundStaff.id }),
+                        data: foundStaff
+                    })
+                } else {
+                    res.status(401).json({
+                        status: 401,
+                        message: "wrong email or password",
+                        token: null,
+                    })
+                }
+            }else {
                 res.status(401).json({
                     status: 401,
                     message: "wrong email or password",
                     token: null,
                 })
             }
+
         } catch (error) {
             console.log(error);
         }
