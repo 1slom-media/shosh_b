@@ -16,6 +16,9 @@ export class OrdersEntity {
     @IsString()
     number_night: string
 
+    @Column({type:"text", array:true})
+    map:string[]
+
     @Column({ type: "varchar", length: 100 })
     @IsString()
     type_payment: string

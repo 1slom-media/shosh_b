@@ -41,8 +41,12 @@ class OrdersController {
 
     public async Post(req: Request, res: Response) {
         const { rooms, number_night, type_payment, pre_payment, sale, chekin_time, chekout_time, arrival_date, departure_date, car_number, parking_space, count_users, company, services, transfer, late_arrival, total_payable, comentary, staff } = req.body
+        let map=[]
+        for(let i=1;i<=Number(number_night);i++){
+            map.push(i)
+        }
 
-        const orders = await AppDataSource.getRepository(OrdersEntity).createQueryBuilder().insert().into(OrdersEntity).values({ rooms, number_night, type_payment, pre_payment, sale, chekin_time, chekout_time, arrival_date, departure_date, car_number, parking_space, count_users, company, services, transfer, late_arrival, total_payable, comentary, staff }).returning("*").execute()
+        const orders = await AppDataSource.getRepository(OrdersEntity).createQueryBuilder().insert().into(OrdersEntity).values({ rooms, number_night, type_payment, pre_payment, sale, chekin_time, chekout_time, arrival_date, departure_date, car_number, parking_space, count_users, company, services, transfer, late_arrival, total_payable, comentary, staff,map}).returning("*").execute()
 
         res.json({
             status: 201,
