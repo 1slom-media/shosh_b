@@ -1,5 +1,8 @@
 import { IsString } from "class-validator";
 import { Entity, PrimaryGeneratedColumn, Column,CreateDateColumn,UpdateDateColumn, OneToMany } from "typeorm";
+import { ConsumptionCategoryEntity } from "./consumption_category";
+import { LidsEntity } from "./lids";
+import { OrdersEntity } from "./orders";
 import { RoomsEntity } from "./rooms";
 import { ServicesEntity } from "./services";
 import { StaffEntity } from "./staff";
@@ -25,6 +28,15 @@ export class FilialEntity {
 
     @OneToMany(()=>RoomsEntity,(rooms)=>rooms.filial)
     rooms:RoomsEntity[]
+
+    @OneToMany(()=>LidsEntity,(lids)=>lids.filial)
+    lids:LidsEntity[]
+
+    @OneToMany(()=>OrdersEntity,(orders)=>orders.filial)
+    orders:OrdersEntity[]
+
+    @OneToMany(()=>ConsumptionCategoryEntity,(consumption_category)=>consumption_category.filial)
+    consumption_category:ConsumptionCategoryEntity[]
 
     @OneToMany(()=>ServicesEntity,(services)=>services.filial)
     services:ServicesEntity[]

@@ -1,5 +1,6 @@
 import { IsString} from "class-validator";
 import { Entity, PrimaryGeneratedColumn, Column,CreateDateColumn,UpdateDateColumn, OneToMany, ManyToOne } from "typeorm";
+import { FilialEntity } from "./filials";
 import { RoomsEntity } from "./rooms";
 import { ServicesOrdersEntity } from "./services_orders";
 import { StaffEntity } from "./staff";
@@ -101,6 +102,9 @@ export class OrdersEntity {
 
     @ManyToOne(()=>RoomsEntity,(rooms)=>rooms.orders)
     rooms:RoomsEntity
+
+    @ManyToOne(()=>FilialEntity,(filial)=>filial.orders)
+    filial:FilialEntity
 
     @OneToMany(() => ServicesOrdersEntity, (services_orders) => services_orders.orders)
     services_orders: ServicesOrdersEntity[]

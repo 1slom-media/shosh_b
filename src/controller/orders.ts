@@ -9,7 +9,8 @@ class OrdersController {
                 users: true,
                 rooms: true,
                 staff:true,
-                services_orders:true
+                services_orders:true,
+                filial:true
             }
         }));
     }
@@ -20,7 +21,8 @@ class OrdersController {
                 users: true,
                 rooms: true,
                 staff: true,
-                services_orders:true
+                services_orders:true,
+                filial:true
             },
             where: { status: "busy" }
         }));
@@ -34,19 +36,20 @@ class OrdersController {
                 users: true,
                 rooms: true,
                 staff: true,
-                services_orders:true
+                services_orders:true,
+                filial:true
             }
         }));
     }
 
     public async Post(req: Request, res: Response) {
-        const { rooms, number_night, type_payment, pre_payment, sale, chekin_time, chekout_time, arrival_date, departure_date, car_number, parking_space, count_users, company, services, transfer, late_arrival, total_payable, comentary, staff } = req.body
+        const { rooms, number_night, type_payment, pre_payment, sale, chekin_time, chekout_time, arrival_date, departure_date, car_number, parking_space, count_users, company, services, transfer, late_arrival, total_payable, comentary, staff,filial } = req.body
         let map=[]
         for(let i=1;i<=Number(number_night);i++){
             map.push(i)
         }
 
-        const orders = await AppDataSource.getRepository(OrdersEntity).createQueryBuilder().insert().into(OrdersEntity).values({ rooms, number_night, type_payment, pre_payment, sale, chekin_time, chekout_time, arrival_date, departure_date, car_number, parking_space, count_users, company, services, transfer, late_arrival, total_payable, comentary, staff,map}).returning("*").execute()
+        const orders = await AppDataSource.getRepository(OrdersEntity).createQueryBuilder().insert().into(OrdersEntity).values({ rooms, number_night, type_payment, pre_payment, sale, chekin_time, chekout_time, arrival_date, departure_date, car_number, parking_space, count_users, company, services, transfer, late_arrival, total_payable, comentary, staff,map,filial}).returning("*").execute()
 
         res.json({
             status: 201,
@@ -57,11 +60,11 @@ class OrdersController {
 
     public async Put(req: Request, res: Response) {
         try {
-            const { rooms, number_night, type_payment, pre_payment, sale, chekin_time, chekout_time, arrival_date, departure_date, car_number, parking_space, count_users, company, services, transfer, late_arrival, total_payable, comentary } = req.body
+            const { rooms, number_night, type_payment, pre_payment, sale, chekin_time, chekout_time, arrival_date, departure_date, car_number, parking_space, count_users, company, services, transfer, late_arrival, total_payable, comentary,filial } = req.body
             const { id } = req.params
 
             const orders = await AppDataSource.getRepository(OrdersEntity).createQueryBuilder().update(OrdersEntity)
-                .set({ rooms, number_night, type_payment, pre_payment, sale, chekin_time, chekout_time, arrival_date, departure_date, car_number, parking_space, count_users, company, services, transfer, late_arrival, total_payable, comentary })
+                .set({ rooms, number_night, type_payment, pre_payment, sale, chekin_time, chekout_time, arrival_date, departure_date, car_number, parking_space, count_users, company, services, transfer, late_arrival, total_payable, comentary,filial })
                 .where({ id })
                 .returning("*")
                 .execute()

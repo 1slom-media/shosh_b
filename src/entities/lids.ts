@@ -1,5 +1,6 @@
 import { IsString} from "class-validator";
 import { Entity, PrimaryGeneratedColumn, Column,CreateDateColumn,UpdateDateColumn, ManyToOne } from "typeorm";
+import { FilialEntity } from "./filials";
 
 
 @Entity({ name: "lids" })
@@ -44,4 +45,7 @@ export class LidsEntity {
 
     @UpdateDateColumn({ type: "timestamp" })
     updateAt: Date;
+
+    @ManyToOne(()=>FilialEntity,(filial)=>filial.lids)
+    filial:FilialEntity
 }

@@ -7,7 +7,10 @@ class FilialController {
         res.json(await AppDataSource.getRepository(FilialEntity).find({
             relations: {
                 staff: true,
-                rooms: true
+                rooms: true,
+                lids:true,
+                orders:true,
+                consumption_category:true
             }
         }));
     }
@@ -19,7 +22,10 @@ class FilialController {
             where: { id: +id },
             relations: {
                 staff: true,
-                rooms: true
+                rooms: true,
+                lids:true,
+                orders:true,
+                consumption_category:true
             }
         }));
     }

@@ -4,24 +4,34 @@ import { LidsEntity } from '../entities/lids';
 
 class LidsController {
     public async Get(req: Request, res: Response): Promise<void> {
-        res.json(await AppDataSource.getRepository(LidsEntity).find());
+        res.json(await AppDataSource.getRepository(LidsEntity).find({
+            relations:{
+                filial:true
+            }
+        }));
     }
 
     public async GetNew(req: Request, res: Response): Promise<void> {
-        res.json(await AppDataSource.getRepository(LidsEntity).find({where:{status:"new"}}));
+        res.json(await AppDataSource.getRepository(LidsEntity).find({
+            relations:{
+                filial:true
+            },where:{status:"new"}}));
     }
 
     public async GetId(req: Request, res: Response): Promise<void> {
         const { id } = req.params
         res.json(await AppDataSource.getRepository(LidsEntity).find({
-            where: { id: +id }
+            where: { id: +id },
+            relations:{
+                filial:true
+            }
         }));
     }
 
     public async Post(req: Request, res: Response) {
-        const {name,phone,arrival_date,departure_date,type_rooms,count_rooms,seriya } = req.body
+        const {name,phone,arrival_date,departure_date,type_rooms,count_rooms,seriya,filial } = req.body
 
-        const lids = await AppDataSource.getRepository(LidsEntity).createQueryBuilder().insert().into(LidsEntity).values({name,phone,arrival_date,departure_date,type_rooms,count_rooms,seriya}).returning("*").execute()
+        const lids = await AppDataSource.getRepository(LidsEntity).createQueryBuilder().insert().into(LidsEntity).values({name,phone,arrival_date,departure_date,type_rooms,count_rooms,seriya,filial}).returning("*").execute()
 
         res.json({
             status: 201,
@@ -32,11 +42,11 @@ class LidsController {
 
     public async Put(req: Request, res: Response) {
         try {
-            const { name,phone,arrival_date,departure_date,type_rooms,count_rooms,seriya,status } = req.body
+            const { name,phone,arrival_date,departure_date,type_rooms,count_rooms,seriya,status,filial } = req.body
             const { id } = req.params
 
             const lids = await AppDataSource.getRepository(LidsEntity).createQueryBuilder().update(LidsEntity)
-                .set({name,phone,arrival_date,departure_date,type_rooms,count_rooms,seriya,status})
+                .set({name,phone,arrival_date,departure_date,type_rooms,count_rooms,seriya,status,filial})
                 .where({ id })
                 .returning("*")
                 .execute()

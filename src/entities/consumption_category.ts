@@ -1,6 +1,7 @@
 import { IsString } from "class-validator";
-import { Entity, PrimaryGeneratedColumn, Column,CreateDateColumn,UpdateDateColumn,OneToMany} from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column,CreateDateColumn,UpdateDateColumn,OneToMany, ManyToOne} from "typeorm";
 import { ConsumptionEntity } from "./consumption";
+import { FilialEntity } from "./filials";
 
 
 @Entity({ name: "consumption_category" })
@@ -20,5 +21,8 @@ export class ConsumptionCategoryEntity {
 
     @OneToMany(()=>ConsumptionEntity,(consumption)=>consumption.consumption_category)
     consumption:ConsumptionEntity[]
+
+    @ManyToOne(()=>FilialEntity,(filial)=>filial.consumption_category)
+    filial:FilialEntity
 
 }
