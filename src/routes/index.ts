@@ -10,6 +10,7 @@ import users from "../controller/users";
 import services from "../controller/services";
 import products from "../controller/products";
 import services_orders from "../controller/services_orders";
+import task from "../controller/task";
 
 
 const router=Router()
@@ -26,6 +27,7 @@ router.get("/staff",staff.Get);
 router.get("/staff/:id",staff.GetId);
 router.post("/staff",staff.Post);
 router.post("/login",staff.SignIn);
+router.put("/staff/:id",staff.Put);
 
 // rooms rout
 router.get("/rooms",rooms.Get);
@@ -52,6 +54,7 @@ router.delete("/consumption/:id",consumption.Delete);
 // Lids rout
 router.get("/lids",lids.Get);
 router.get("/newlids",lids.GetNew);
+router.get("lidsactive",lids.GetActive);
 router.get("/lids/:id",lids.GetId);
 router.post("/lids",lids.Post);
 router.put("/lids/:id",lids.Put);
@@ -92,6 +95,15 @@ router.get("/services_orders/:id",services_orders.GetId)
 router.post("/services_orders",services_orders.Post)
 router.put("/services_orders/:id",services_orders.Put)
 router.delete("/services_orders/:id",services_orders.Delete)
+
+// task
+router.get("/task",task.Get);
+router.get("/task/:id",task.GetId);
+router.post("/task",task.Post);
+router.put("/task/:id",task.Put);
+router.delete("/task/:id",task.Delete);
+
+
 
 
 

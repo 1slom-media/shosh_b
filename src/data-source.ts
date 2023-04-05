@@ -10,6 +10,7 @@ import { RoomsEntity } from "./entities/rooms"
 import { ServicesEntity } from "./entities/services"
 import { ServicesOrdersEntity } from "./entities/services_orders"
 import { StaffEntity } from "./entities/staff"
+import { TaskEntity } from "./entities/task"
 import { UsersEntity } from "./entities/users"
 
 
@@ -22,7 +23,7 @@ export const AppDataSource = new DataSource({
     database: "shosh_b",
     synchronize: true,
     logging: false,
-    entities: [FilialEntity, StaffEntity, RoomsEntity, UsersEntity, LidsEntity, ConsumptionCategoryEntity,ConsumptionEntity,OrdersEntity,ServicesEntity,ProductsEntity,ServicesOrdersEntity],
+    entities: [FilialEntity, StaffEntity, RoomsEntity, UsersEntity, LidsEntity, ConsumptionCategoryEntity,ConsumptionEntity,OrdersEntity,ServicesEntity,ProductsEntity,ServicesOrdersEntity,TaskEntity],
     migrations: [],
     subscribers: [],
 })

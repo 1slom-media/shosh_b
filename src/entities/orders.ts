@@ -17,9 +17,6 @@ export class OrdersEntity {
     @IsString()
     number_night: string
 
-    @Column({type:"text", array:true})
-    map:string[]
-
     @Column({ type: "varchar", length: 100 })
     @IsString()
     type_payment: string
@@ -28,17 +25,13 @@ export class OrdersEntity {
     @IsString()
     pre_payment: string
 
+    @Column({ type: "varchar", length: 100, nullable:true })
+    @IsString()
+    definition: string
+
     @Column({ type: "varchar", length: 100,nullable:true })
     @IsString()
     sale: string
-
-    @Column({ type: "varchar", length: 100 })
-    @IsString()
-    chekin_time: string
-
-    @Column({ type: "varchar", length: 100 })
-    @IsString()
-    chekout_time: string
 
     @Column({ type: "varchar", length: 100 })
     @IsString()
@@ -50,31 +43,11 @@ export class OrdersEntity {
 
     @Column({ type: "varchar", length: 100,nullable:true })
     @IsString()
-    car_number: string
-
-    @Column({ type: "varchar", length: 200,nullable:true })
-    @IsString()
-    parking_space: string
-
-    @Column({ type: "varchar", length: 100,nullable:true })
-    @IsString()
     count_users: string
 
     @Column({ type: "varchar", length: 200,nullable:true })
     @IsString()
     company: string
-
-    @Column({ type: "varchar", length: 200,nullable:true })
-    @IsString()
-    services: string
-
-    @Column({ type: "varchar", length: 200,nullable:true })
-    @IsString()
-    transfer: string
-
-    @Column({ type: "varchar", length: 200,nullable:true })
-    @IsString()
-    late_arrival: string
 
     @Column({ type: "varchar", length: 200 })
     @IsString()

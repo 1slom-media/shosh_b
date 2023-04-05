@@ -19,9 +19,11 @@ class StaffController {
                 passport: true,
                 salary: true,
                 role: true,
+                number_app:true,
                 createdAt: true,
                 updateAt: true
             },
+            order:{number_app:"DESC"},
             relations: {
                 filial: true
             }
@@ -43,9 +45,11 @@ class StaffController {
                 passport: true,
                 salary: true,
                 role: true,
+                number_app:true,
                 createdAt: true,
                 updateAt: true
-            }
+            },
+            order:{number_app:"DESC"}
             , relations: {
                 filial: true
             }, where: { id: +id }
@@ -97,6 +101,30 @@ class StaffController {
                 })
             }
 
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    public async Put(req: Request, res: Response) {
+        try {
+            const { id } = req.params
+            let {number_app}=req.body
+            const staff=await AppDataSource.getRepository(StaffEntity).findOneBy({id:+id})
+
+            number_app+=staff.number_app
+              
+            const tasks = await AppDataSource.getRepository(StaffEntity).createQueryBuilder().update(StaffEntity)
+                .set({number_app})
+                .where({ id })
+                .returning("*")
+                .execute()
+
+            res.json({
+                status: 200,
+                message: "task updated",
+                data: tasks.raw[0]
+            })
         } catch (error) {
             console.log(error);
         }

@@ -18,6 +18,13 @@ class LidsController {
             },where:{status:"new"}}));
     }
 
+    public async GetActive(req: Request, res: Response): Promise<void> {
+        res.json(await AppDataSource.getRepository(LidsEntity).find({
+            relations:{
+                filial:true
+            },where:{status:"accepted"}}));
+    }
+
     public async GetId(req: Request, res: Response): Promise<void> {
         const { id } = req.params
         res.json(await AppDataSource.getRepository(LidsEntity).find({

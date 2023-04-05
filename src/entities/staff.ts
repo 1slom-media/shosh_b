@@ -2,6 +2,7 @@ import { IsString,IsEmail, Length } from "class-validator";
 import { Entity, PrimaryGeneratedColumn, Column,CreateDateColumn,UpdateDateColumn, ManyToOne, OneToMany } from "typeorm";
 import { FilialEntity } from "./filials";
 import { OrdersEntity } from "./orders";
+import { TaskEntity } from "./task";
 
 
 @Entity({ name: "staff" })
@@ -47,6 +48,9 @@ export class StaffEntity {
     @Column({ type: "varchar" })
     role: string; 
 
+    @Column({ type: "int",default:0 })
+    number_app: number; 
+
     @CreateDateColumn({ type: "timestamp" })
     createdAt: Date;
 
@@ -58,4 +62,7 @@ export class StaffEntity {
 
     @OneToMany(() => OrdersEntity, (orders) => orders.staff)
     orders: OrdersEntity[]
+
+    @OneToMany(() => TaskEntity, (task) => task.staff)
+    task: OrdersEntity[]
 }
