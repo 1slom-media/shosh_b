@@ -10,11 +10,11 @@ export class StaffEntity {
     @PrimaryGeneratedColumn()
     id: number
 
-    @Column({ type: "varchar", length: 100 })
+    @Column({ type: "varchar", length: 200 })
     @IsString()
     staff_name: string
 
-    @Column({ type: "varchar", length: 100 })
+    @Column({ type: "varchar", length: 200 })
     @IsString()
     staff_surname: string
 
@@ -26,11 +26,11 @@ export class StaffEntity {
     @IsString()
     phone: string
 
-    @Column({ type: "varchar", length: 100 })
+    @Column({ type: "text" })
     @IsString()
     image: string
 
-    @Column({ type: "varchar", length: 100 })
+    @Column({ type: "text" }) 
     @IsString()
     passport: string
 
@@ -47,7 +47,7 @@ export class StaffEntity {
 
     @Column({ type: "varchar" })
     role: string; 
-
+ 
     @Column({ type: "int",default:0 })
     number_app: number; 
 

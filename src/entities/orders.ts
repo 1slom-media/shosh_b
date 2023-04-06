@@ -23,7 +23,7 @@ export class OrdersEntity {
 
     @Column({ type: "varchar", length: 200,nullable:true })
     @IsString()
-    pre_payment: string
+    phone: string
 
     @Column({ type: "varchar", length: 100, nullable:true })
     @IsString()

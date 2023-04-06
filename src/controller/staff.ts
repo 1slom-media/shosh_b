@@ -25,7 +25,8 @@ class StaffController {
             },
             order:{number_app:"DESC"},
             relations: {
-                filial: true
+                filial: true,
+                task:true
             }
         }));
     }
@@ -51,7 +52,8 @@ class StaffController {
             },
             order:{number_app:"DESC"}
             , relations: {
-                filial: true
+                filial: true,
+                task:true
             }, where: { id: +id }
         }));
     }
@@ -133,3 +135,4 @@ class StaffController {
 }
 
 export default new StaffController();
+
