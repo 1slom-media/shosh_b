@@ -6,7 +6,8 @@ class UsersController {
     public async Get(req: Request, res: Response): Promise<void> {
         res.json(await AppDataSource.getRepository(TaskEntity).find({
             relations: {
-                staff:true
+                staff:true,
+                manager:true
             }
         }));
     }
@@ -16,15 +17,16 @@ class UsersController {
         res.json(await AppDataSource.getRepository(TaskEntity).find({
             where: { id: +id },
             relations: {
-                staff:true
+                staff:true,
+                manager:true
             }
         }));
     }
 
     public async Post(req: Request, res: Response) {
-        const {task,importance,dispatch_time,deadline,staff} = req.body
+        const {task,importance,dispatch_time,deadline,staff,manager} = req.body
 
-        const tasks = await AppDataSource.getRepository(TaskEntity).createQueryBuilder().insert().into(TaskEntity).values({task,importance,dispatch_time,deadline,staff}).returning("*").execute()
+        const tasks = await AppDataSource.getRepository(TaskEntity).createQueryBuilder().insert().into(TaskEntity).values({task,importance,dispatch_time,deadline,staff,manager}).returning("*").execute()
 
         res.json({
             status: 201,
@@ -35,11 +37,11 @@ class UsersController {
 
     public async Put(req: Request, res: Response) {
         try {
-            const {task,importance,dispatch_time,deadline,staff } = req.body
+            const {task,importance,dispatch_time,deadline,staff,manager } = req.body
             const { id } = req.params
 
             const tasks = await AppDataSource.getRepository(TaskEntity).createQueryBuilder().update(TaskEntity)
-                .set({ task,importance,dispatch_time,deadline,staff})
+                .set({ task,importance,dispatch_time,deadline,staff,manager})
                 .where({ id })
                 .returning("*")
                 .execute()

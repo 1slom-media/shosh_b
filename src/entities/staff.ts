@@ -64,5 +64,5 @@ export class StaffEntity {
     orders: OrdersEntity[]
 
     @OneToMany(() => TaskEntity, (task) => task.staff)
-    task: OrdersEntity[]
+    task: TaskEntity[]
 }

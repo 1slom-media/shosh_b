@@ -31,6 +31,9 @@ export class TaskEntity {
     @ManyToOne(() => StaffEntity, (staff) => staff.task)
     staff: StaffEntity
 
+    @ManyToOne(() => StaffEntity, (staff) => staff.task)
+    manager: StaffEntity
+
     @CreateDateColumn({ type: "timestamp" })
     createdAt: Date;
 
