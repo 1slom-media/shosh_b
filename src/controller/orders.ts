@@ -5,25 +5,27 @@ import { OrdersEntity } from '../entities/orders';
 class OrdersController {
     public async Get(req: Request, res: Response): Promise<void> {
         res.json(await AppDataSource.getRepository(OrdersEntity).find({
-            relations: {
-                users: true,
-                rooms: true,
-                staff:true,
-                services_orders:true,
-                filial:true
-            }
+            relations: [
+                'services_orders', 'services_orders.products',
+                'services_orders.services',
+                'users',
+                'rooms',
+                'staff',
+                'filial'
+            ]
         }));
     }
 
     public async GetBusy(req: Request, res: Response): Promise<void> {
         res.json(await AppDataSource.getRepository(OrdersEntity).find({
-            relations: {
-                users: true,
-                rooms: true,
-                staff: true,
-                services_orders:true,
-                filial:true
-            },
+            relations: [
+                'services_orders', 'services_orders.products',
+                'services_orders.services',
+                'users',
+                'rooms',
+                'staff',
+                'filial'
+            ],
             where: { status: "busy" }
         }));
     }
@@ -32,20 +34,21 @@ class OrdersController {
         const { id } = req.params
         res.json(await AppDataSource.getRepository(OrdersEntity).find({
             where: { id: +id },
-            relations: {
-                users: true,
-                rooms: true,
-                staff: true,
-                services_orders:true,
-                filial:true
-            }
+            relations: [
+                'services_orders', 'services_orders.products',
+                'services_orders.services',
+                'users',
+                'rooms',
+                'staff',
+                'filial'
+            ]
         }));
     }
 
     public async Post(req: Request, res: Response) {
-        const { rooms, number_night, type_payment, phone,arrival_date, departure_date,count_users, company,definition,total_payable, comentary, staff,filial } = req.body
+        const { rooms, number_night, type_payment, phone, arrival_date, departure_date, count_users, company, definition, total_payable, comentary, staff, filial } = req.body
 
-        const orders = await AppDataSource.getRepository(OrdersEntity).createQueryBuilder().insert().into(OrdersEntity).values({ rooms, number_night, type_payment, phone,arrival_date, departure_date,count_users, company,definition,total_payable, comentary, staff,filial}).returning("*").execute()
+        const orders = await AppDataSource.getRepository(OrdersEntity).createQueryBuilder().insert().into(OrdersEntity).values({ rooms, number_night, type_payment, phone, arrival_date, departure_date, count_users, company, definition, total_payable, comentary, staff, filial }).returning("*").execute()
 
         res.json({
             status: 201,
@@ -56,11 +59,11 @@ class OrdersController {
 
     public async Put(req: Request, res: Response) {
         try {
-            const { rooms, number_night, type_payment, phone,arrival_date, departure_date,count_users, company,definition,total_payable, comentary, staff,filial  } = req.body
+            const { rooms, number_night, type_payment, phone, arrival_date, departure_date, count_users, company, definition, total_payable, comentary, staff, filial } = req.body
             const { id } = req.params
 
             const orders = await AppDataSource.getRepository(OrdersEntity).createQueryBuilder().update(OrdersEntity)
-                .set({ rooms, number_night, type_payment, phone,arrival_date, departure_date,count_users, company,definition,total_payable, comentary, staff,filial })
+                .set({ rooms, number_night, type_payment, phone, arrival_date, departure_date, count_users, company, definition, total_payable, comentary, staff, filial })
                 .where({ id })
                 .returning("*")
                 .execute()

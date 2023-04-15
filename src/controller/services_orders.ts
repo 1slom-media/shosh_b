@@ -24,8 +24,8 @@ class ServicesOrdersController {
     }
 
     public async Post(req: Request, res: Response) {
-        const {price,count,type_payment,status_payment,comentary,orders,products } = req.body
-        const services_orders = await AppDataSource.getRepository(ServicesOrdersEntity).createQueryBuilder().insert().into(ServicesOrdersEntity).values({ price,count,type_payment,status_payment,comentary,orders,products }).returning("*").execute()
+        const {price,count,type_payment,status_payment,comentary,orders,products,services } = req.body
+        const services_orders = await AppDataSource.getRepository(ServicesOrdersEntity).createQueryBuilder().insert().into(ServicesOrdersEntity).values({ price,count,type_payment,status_payment,comentary,orders,products,services }).returning("*").execute()
 
         res.json({
             status: 201,
@@ -36,11 +36,11 @@ class ServicesOrdersController {
 
     public async Put(req: Request, res: Response) {
         try {
-            const { price,count,type_payment,status_payment,comentary,orders,products } = req.body
+            const { price,count,type_payment,status_payment,comentary,orders,products,services } = req.body
             const { id } = req.params
 
             const services_orders = await AppDataSource.getRepository(ServicesOrdersEntity).createQueryBuilder().update(ServicesOrdersEntity)
-                .set({ price,count,type_payment,status_payment,comentary,orders,products })
+                .set({ price,count,type_payment,status_payment,comentary,orders,products,services })
                 .where({ id })
                 .returning("*")
                 .execute()
