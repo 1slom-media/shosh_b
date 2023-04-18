@@ -12,7 +12,7 @@ class OrdersController {
                 'rooms',
                 'staff',
                 'filial'
-            ]
+            ],order:{id:"ASC"}
         }));
     }
 
@@ -25,7 +25,7 @@ class OrdersController {
                 'rooms',
                 'staff',
                 'filial'
-            ],
+            ],order:{id:"ASC"},
             where: { status: "busy" }
         }));
     }

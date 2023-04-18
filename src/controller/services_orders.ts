@@ -8,7 +8,7 @@ class ServicesOrdersController {
             relations: {
                 products: true,
                 orders:true
-            }
+            },order:{id:"ASC"}
         }));
     }
 
@@ -19,7 +19,7 @@ class ServicesOrdersController {
             relations: {
                 products: true,
                 orders:true
-            }, where: { id: +id }
+            }, where: { id: +id },order:{id:"ASC"}
         }));
     }
 

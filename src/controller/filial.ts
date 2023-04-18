@@ -10,7 +10,8 @@ class FilialController {
                 rooms: true,
                 lids:true,
                 orders:true,
-                consumption_category:true
+                consumption_category:true,
+                products:true
             }
         }));
     }
@@ -25,7 +26,8 @@ class FilialController {
                 rooms: true,
                 lids:true,
                 orders:true,
-                consumption_category:true
+                consumption_category:true,
+                products:true
             }
         }));
     }

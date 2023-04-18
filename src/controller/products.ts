@@ -6,7 +6,8 @@ class ProductsController {
     public async Get(req: Request, res: Response): Promise<void> {
         res.json(await AppDataSource.getRepository(ProductsEntity).find({
             relations: {
-                services: true
+                services: true,
+                filial:true
             }
         }));
     }
@@ -16,14 +17,15 @@ class ProductsController {
 
         res.json(await AppDataSource.getRepository(ProductsEntity).find({
             relations: {
-                services: true
+                services: true,
+                filial:true
             }, where: { id: +id }
         }));
     }
 
     public async Post(req: Request, res: Response) {
-        const {product_name, services,price,count } = req.body
-        const products = await AppDataSource.getRepository(ProductsEntity).createQueryBuilder().insert().into(ProductsEntity).values({ product_name,services,price,count }).returning("*").execute()
+        const {product_name, services,price,count,filial } = req.body
+        const products = await AppDataSource.getRepository(ProductsEntity).createQueryBuilder().insert().into(ProductsEntity).values({ product_name,services,price,count,filial }).returning("*").execute()
 
         res.json({
             status: 201,
@@ -34,11 +36,11 @@ class ProductsController {
 
     public async Put(req: Request, res: Response) {
         try {
-            const { product_name, services,price,count } = req.body
+            const { product_name, services,price,count,filial } = req.body
             const { id } = req.params
 
             const products = await AppDataSource.getRepository(ProductsEntity).createQueryBuilder().update(ProductsEntity)
-                .set({ product_name, services,price,count })
+                .set({ product_name, services,price,count,filial })
                 .where({ id })
                 .returning("*")
                 .execute()

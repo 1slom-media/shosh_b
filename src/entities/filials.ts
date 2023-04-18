@@ -6,6 +6,7 @@ import { OrdersEntity } from "./orders";
 import { RoomsEntity } from "./rooms";
 import { ServicesEntity } from "./services";
 import { StaffEntity } from "./staff";
+import { ProductsEntity } from "./products";
 
 
 @Entity({ name: "filials" })
@@ -40,4 +41,7 @@ export class FilialEntity {
 
     @OneToMany(()=>ServicesEntity,(services)=>services.filial)
     services:ServicesEntity[]
+
+    @OneToMany(()=>ProductsEntity,(products)=>products.filial)
+    products:ProductsEntity[]
 }

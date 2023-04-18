@@ -8,7 +8,7 @@ class UsersController {
             relations: {
                 staff:true,
                 manager:true
-            }
+            },order:{id:"DESC"}
         }));
     }
 

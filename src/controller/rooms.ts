@@ -8,7 +8,7 @@ class RoomsController {
             relations: {
                 filial: true,
                 orders:true
-            }
+            },order:{id:"ASC"}
         }));
     }
 
@@ -17,7 +17,7 @@ class RoomsController {
             relations: {
                 filial: true,
                 orders:true
-            }, where: { status: "empty" }
+            }, where: { status: "empty" },order:{id:"ASC"}
         }));
     }
 

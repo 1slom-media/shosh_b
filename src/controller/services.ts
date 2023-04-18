@@ -7,7 +7,7 @@ class ServicesController {
         res.json(await AppDataSource.getRepository(ServicesEntity).find({
             relations: {
                 filial: true
-            }
+            },order:{id:"ASC"}
         }));
     }
 

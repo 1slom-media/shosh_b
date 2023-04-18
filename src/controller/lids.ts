@@ -7,7 +7,7 @@ class LidsController {
         res.json(await AppDataSource.getRepository(LidsEntity).find({
             relations:{
                 filial:true
-            }
+            },order:{id:"ASC"}
         }));
     }
 
@@ -15,14 +15,14 @@ class LidsController {
         res.json(await AppDataSource.getRepository(LidsEntity).find({
             relations:{
                 filial:true
-            },where:{status:"new"}}));
+            },where:{status:"new"},order:{id:"ASC"}}));
     }
 
     public async GetActive(req: Request, res: Response): Promise<void> {
         res.json(await AppDataSource.getRepository(LidsEntity).find({
             relations:{
                 filial:true
-            },where:{status:"accepted"}}));
+            },where:{status:"accepted"},order:{id:"ASC"}}));
     }
 
     public async GetId(req: Request, res: Response): Promise<void> {
