@@ -21,6 +21,10 @@ export class OrdersEntity {
     @IsString()
     type_payment: string
 
+    @Column({ type: "varchar", length: 100 })
+    @IsString()
+    status_payment: string
+
     @Column({ type: "varchar", length: 200,nullable:true })
     @IsString()
     phone: string
