@@ -1,4 +1,4 @@
-import { IsString} from "class-validator";
+import { IsString, isArray} from "class-validator";
 import { Entity, PrimaryGeneratedColumn, Column,CreateDateColumn,UpdateDateColumn, OneToMany, ManyToOne } from "typeorm";
 import { FilialEntity } from "./filials";
 import { RoomsEntity } from "./rooms";
@@ -25,13 +25,13 @@ export class OrdersEntity {
     @IsString()
     phone: string
 
-    @Column({ type: "varchar", length: 100, nullable:true })
-    @IsString()
-    definition: string
-
-    @Column({ type: "varchar", length: 100,nullable:true })
+    @Column({ type: "varchar", length: 100,nullable:true,default:0 })
     @IsString()
     sale: string
+
+    @Column({ type: "varchar", length: 100,nullable:true,default:0 })
+    @IsString()
+    definition: string
 
     @Column({ type: "varchar", length: 100 })
     @IsString()
@@ -52,6 +52,18 @@ export class OrdersEntity {
     @Column({ type: "varchar", length: 200 })
     @IsString()
     total_payable: string
+
+    @Column({ type: "varchar", length: 200 })
+    @IsString()
+    booking: string
+
+    @Column({ type: "varchar", length: 200, default:0 })
+    @IsString()
+    paid: string
+
+    @Column({ type: "varchar", length: 200, default:0 })
+    @IsString()
+    debt: string
 
     @Column({ type: "text",nullable:true })
     @IsString()
