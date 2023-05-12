@@ -67,6 +67,10 @@ export class OrdersEntity {
 
     @Column({ type: "text",nullable:true })
     @IsString()
+    country: string
+
+    @Column({ type: "text",nullable:true })
+    @IsString()
     comentary: string
 
     @Column({ type: "varchar", length: 100, default:"busy" })
