@@ -11,6 +11,7 @@ import services from "../controller/services";
 import products from "../controller/products";
 import services_orders from "../controller/services_orders";
 import task from "../controller/task";
+import change from "../controller/change";
 
 
 const router=Router()
@@ -54,7 +55,7 @@ router.delete("/consumption/:id",consumption.Delete);
 // Lids rout
 router.get("/lids",lids.Get);
 router.get("/newlids",lids.GetNew);
-router.get("lidsactive",lids.GetActive);
+router.get("/lidsactive",lids.GetActive);
 router.get("/lids/:id",lids.GetId);
 router.post("/lids",lids.Post);
 router.put("/lids/:id",lids.Put);
@@ -102,6 +103,15 @@ router.get("/task/:id",task.GetId);
 router.post("/task",task.Post);
 router.put("/task/:id",task.Put);
 router.delete("/task/:id",task.Delete);
+
+// smena
+router.get("/change",change.Get);
+router.get("/changeadmin",change.GetAdmin);
+router.get("/changemanager",change.GetManager);
+router.get("/change/:id",change.GetId);
+router.post("/change",change.Post);
+router.put("/change/:id",change.Put);
+router.delete("/changedelete",change.Delete);
 
 
 

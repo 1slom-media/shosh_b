@@ -3,6 +3,7 @@ import { Entity, PrimaryGeneratedColumn, Column,CreateDateColumn,UpdateDateColum
 import { FilialEntity } from "./filials";
 import { OrdersEntity } from "./orders";
 import { TaskEntity } from "./task";
+import { ChangeEntity } from "./change";
 
 
 @Entity({ name: "staff" })
@@ -65,4 +66,7 @@ export class StaffEntity {
 
     @OneToMany(() => TaskEntity, (task) => task.staff)
     task: TaskEntity[]
+
+    @OneToMany(() => ChangeEntity, (change) => change.staff)
+    change: ChangeEntity[]
 }

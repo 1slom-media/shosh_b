@@ -2,6 +2,7 @@ import { IsNumber, IsString } from "class-validator";
 import { Entity, PrimaryGeneratedColumn, Column,CreateDateColumn,UpdateDateColumn,ManyToOne, OneToMany } from "typeorm";
 import { FilialEntity } from "./filials";
 import { OrdersEntity } from "./orders";
+import { ChangeEntity } from "./change";
 
 
 @Entity({ name: "rooms" })
@@ -40,4 +41,7 @@ export class RoomsEntity {
 
     @OneToMany(() => OrdersEntity, (orders) => orders.rooms)
     orders: OrdersEntity[]
+
+    @OneToMany(() => ChangeEntity, (change) => change.rooms)
+    change: ChangeEntity[]
 }
