@@ -78,7 +78,7 @@ class ChangeController {
 
     public async Delete(req: Request, res: Response) {
         try {
-            const { id } = req.body
+            const { id } = req.params
 
             const change = await AppDataSource.getRepository(ChangeEntity).createQueryBuilder().update(ChangeEntity)
                 .set({ status: "manager_view" })

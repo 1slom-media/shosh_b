@@ -111,7 +111,7 @@ router.get("/changemanager",change.GetManager);
 router.get("/change/:id",change.GetId);
 router.post("/change",change.Post);
 router.put("/change/:id",change.Put);
-router.delete("/changedelete",change.Delete);
+router.delete("/changedelete/:id",change.Delete);
 
 
 
