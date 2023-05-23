@@ -43,9 +43,9 @@ class ConsumptionController {
     }
 
     public async Post(req: Request, res: Response) {
-        const { cash_flow, transfer_exp, comentary, consumption_category } = req.body
+        const { cash_flow, transfer_exp, comentary,staff, consumption_category } = req.body
 
-        const consumption = await AppDataSource.getRepository(ConsumptionEntity).createQueryBuilder().insert().into(ConsumptionEntity).values({ cash_flow, transfer_exp, comentary, consumption_category}).returning("*").execute()
+        const consumption = await AppDataSource.getRepository(ConsumptionEntity).createQueryBuilder().insert().into(ConsumptionEntity).values({ cash_flow, transfer_exp, comentary,staff, consumption_category}).returning("*").execute()
 
         res.json({
             status: 201,
@@ -56,11 +56,11 @@ class ConsumptionController {
 
     public async Put(req: Request, res: Response) {
         try {
-            const { cash_flow, transfer_exp, comentary, consumption_category } = req.body
+            const { cash_flow, transfer_exp, comentary,staff, consumption_category } = req.body
             const {id}=req.params
 
             const consumption = await AppDataSource.getRepository(ConsumptionEntity).createQueryBuilder().update(ConsumptionEntity)
-            .set({cash_flow, transfer_exp, comentary, consumption_category})
+            .set({cash_flow, transfer_exp, comentary,staff, consumption_category})
             .where({ id })
             .returning("*")
             .execute()
