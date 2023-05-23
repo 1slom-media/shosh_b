@@ -4,6 +4,7 @@ import { FilialEntity } from "./filials";
 import { OrdersEntity } from "./orders";
 import { TaskEntity } from "./task";
 import { ChangeEntity } from "./change";
+import { ConsumptionEntity } from "./consumption";
 
 
 @Entity({ name: "staff" })
@@ -69,4 +70,7 @@ export class StaffEntity {
 
     @OneToMany(() => ChangeEntity, (change) => change.staff)
     change: ChangeEntity[]
+
+    @OneToMany(() => ConsumptionEntity, (consumption) => consumption.staff)
+    consumption: ConsumptionEntity[]
 }

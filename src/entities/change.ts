@@ -24,22 +24,6 @@ export class ChangeEntity {
     @Column({ type: "varchar",nullable:true })
     @IsString()
     departure_date: string
-
-    @Column({ type: "varchar",nullable:true })
-    @IsString()
-    cash_flow: string
-
-    @Column({ type: "varchar",nullable:true })
-    @IsString()
-    transfer_exp: string
-
-    @Column({ type: "varchar", nullable:true})
-    @IsString()
-    comentary: string
-
-    @Column({ type: "varchar", nullable:true})
-    @IsString()
-    consuption_category: string
  
     @Column({ type: "varchar", length: 100,default:"admin_view"})
     @IsString()
@@ -50,7 +34,6 @@ export class ChangeEntity {
 
     @ManyToOne(() => RoomsEntity, (rooms) => rooms.change)
     rooms: RoomsEntity
-
 
     @CreateDateColumn({ type: "timestamp" })
     createdAt: Date;

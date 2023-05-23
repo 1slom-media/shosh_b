@@ -44,9 +44,9 @@ class ChangeController {
     }
 
     public async Post(req: Request, res: Response) {
-        const { full_name,cash_coming,enum_coming,departure_date,cash_flow,transfer_exp,comentary,consuption_category,staff,rooms } = req.body
+        const { full_name,cash_coming,enum_coming,departure_date,staff,rooms } = req.body
 
-        const change = await AppDataSource.getRepository(ChangeEntity).createQueryBuilder().insert().into(ChangeEntity).values({full_name,cash_coming,enum_coming,departure_date,cash_flow,transfer_exp,comentary,consuption_category,staff,rooms }).returning("*").execute()
+        const change = await AppDataSource.getRepository(ChangeEntity).createQueryBuilder().insert().into(ChangeEntity).values({full_name,cash_coming,enum_coming,departure_date,staff,rooms }).returning("*").execute()
 
         res.json({
             status: 201,
@@ -57,11 +57,11 @@ class ChangeController {
 
     public async Put(req: Request, res: Response) {
         try {
-            const { full_name,cash_coming,enum_coming,departure_date,cash_flow,transfer_exp,comentary,consuption_category,staff,rooms} = req.body
+            const { full_name,cash_coming,enum_coming,departure_date,staff,rooms} = req.body
             const { id } = req.params
 
             const change = await AppDataSource.getRepository(ChangeEntity).createQueryBuilder().update(ChangeEntity)
-                .set({full_name,cash_coming,enum_coming,departure_date,cash_flow,transfer_exp,comentary,consuption_category,staff,rooms})
+                .set({full_name,cash_coming,enum_coming,departure_date,staff,rooms})
                 .where({ id })
                 .returning("*")
                 .execute()

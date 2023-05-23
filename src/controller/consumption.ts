@@ -6,7 +6,8 @@ class ConsumptionController {
     public async Get(req: Request, res: Response): Promise<void> {
         res.json(await AppDataSource.getRepository(ConsumptionEntity).find({
             relations: {
-                consumption_category: true
+                consumption_category: true,
+                staff:true,
             }
         }));
     }
@@ -15,15 +16,36 @@ class ConsumptionController {
         const { id } = req.params
         res.json(await AppDataSource.getRepository(ConsumptionEntity).find({
             relations: {
-                consumption_category: true
+                consumption_category: true,
+                staff:true,
             }, where: { id: +id }
         }));
     }
 
-    public async Post(req: Request, res: Response) {
-        const { amount, type_payment, comentary, consumption_category } = req.body
+    public async GetAdmin(req: Request, res: Response): Promise<void> {
+        res.json(await AppDataSource.getRepository(ConsumptionEntity).find({
+            relations:{
+                staff:true,
+                consumption_category: true
+            },order:{id:"ASC"},
+            where: { status: "admin_view" }
+        }));
+    }
 
-        const consumption = await AppDataSource.getRepository(ConsumptionEntity).createQueryBuilder().insert().into(ConsumptionEntity).values({ amount, type_payment, comentary, consumption_category }).returning("*").execute()
+    public async GetManager(req: Request, res: Response): Promise<void> {
+        res.json(await AppDataSource.getRepository(ConsumptionEntity).find({
+            relations:{
+                staff:true,
+                consumption_category: true
+            },order:{id:"ASC"},
+            where: { status: "manager_view" }
+        }));
+    }
+
+    public async Post(req: Request, res: Response) {
+        const { cash_flow, transfer_exp, comentary, consumption_category } = req.body
+
+        const consumption = await AppDataSource.getRepository(ConsumptionEntity).createQueryBuilder().insert().into(ConsumptionEntity).values({ cash_flow, transfer_exp, comentary, consumption_category}).returning("*").execute()
 
         res.json({
             status: 201,
@@ -34,11 +56,11 @@ class ConsumptionController {
 
     public async Put(req: Request, res: Response) {
         try {
-            const { amount, type_payment, comentary, consumption_category } = req.body
+            const { cash_flow, transfer_exp, comentary, consumption_category } = req.body
             const {id}=req.params
 
             const consumption = await AppDataSource.getRepository(ConsumptionEntity).createQueryBuilder().update(ConsumptionEntity)
-            .set({amount, type_payment, comentary, consumption_category})
+            .set({cash_flow, transfer_exp, comentary, consumption_category})
             .where({ id })
             .returning("*")
             .execute()
@@ -55,14 +77,18 @@ class ConsumptionController {
 
     public async Delete(req: Request, res: Response) {
         try {
-            const {id}=req.params
+            const { id } = req.params
 
-            const consumption = await AppDataSource.getRepository(ConsumptionEntity).createQueryBuilder().delete().from(ConsumptionEntity).where({ id }).returning("*").execute()
+            const change = await AppDataSource.getRepository(ConsumptionEntity).createQueryBuilder().update(ConsumptionEntity)
+                .set({ status: "manager_view" })
+                .where({status:"admin_view"}).andWhere({staff:id})
+                .returning("*")
+                .execute()
 
             res.json({
                 status: 200,
-                message: "Consumption deleted",
-                data: consumption.raw[0]
+                message: "change deleted",
+                data: change.raw[0]
             })
         } catch (error) {
             console.log(error);

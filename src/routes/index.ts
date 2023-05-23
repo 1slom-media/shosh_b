@@ -48,6 +48,8 @@ router.delete("/consumption_category/:id",consumption_category.Delete);
 // consumption rout
 router.get("/consumption",consumption.Get);
 router.get("/consumption/:id",consumption.GetId);
+router.get("/consumptionadmin",consumption.GetAdmin);
+router.get("/consumptionmanager",consumption.GetManager);
 router.post("/consumption",consumption.Post);
 router.put("/consumption/:id",consumption.Put);
 router.delete("/consumption/:id",consumption.Delete);
