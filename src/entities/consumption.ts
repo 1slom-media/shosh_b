@@ -30,7 +30,7 @@ export class ConsumptionEntity {
     @UpdateDateColumn({ type: "timestamp" })
     updateAt: Date;
 
-    @ManyToOne(() => StaffEntity, (staff) => staff.consumption)
+    @ManyToOne(() => StaffEntity, (staff) => staff.consumption,{nullable:true})
     staff: StaffEntity
 
     @ManyToOne(() => ConsumptionCategoryEntity, (consumption_category) => consumption_category.consumption)
