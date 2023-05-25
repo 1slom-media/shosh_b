@@ -57,6 +57,10 @@ export class OrdersEntity {
     @IsString()
     total_payable: string
 
+    @Column({ type: "varchar", length: 500,nullable:true })
+    @IsString()
+    company_details: string
+
     @Column({ type: "varchar", length: 200,default:0})
     @IsString()
     booking: string
