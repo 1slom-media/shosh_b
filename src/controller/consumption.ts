@@ -79,7 +79,7 @@ class ConsumptionController {
         try {
             const { id } = req.params
 
-            const change = await AppDataSource.getRepository(ConsumptionEntity).createQueryBuilder().update(ConsumptionEntity)
+            const consumption = await AppDataSource.getRepository(ConsumptionEntity).createQueryBuilder().update(ConsumptionEntity)
                 .set({ status: "manager_view" })
                 .where({status:"admin_view"}).andWhere({staff:id})
                 .returning("*")
@@ -87,8 +87,8 @@ class ConsumptionController {
 
             res.json({
                 status: 200,
-                message: "change deleted",
-                data: change.raw[0]
+                message: "consumption deleted",
+                data: consumption.raw[0]
             })
         } catch (error) {
             console.log(error);

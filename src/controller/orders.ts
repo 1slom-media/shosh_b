@@ -59,11 +59,11 @@ class OrdersController {
 
     public async Put(req: Request, res: Response) {
         try {
-            const { rooms, number_night, type_payment, phone, arrival_date, departure_date, count_users,country,status_payment, company, definition,booking,paid,debt, total_payable, comentary, staff, filial} = req.body
+            const { rooms, number_night, type_payment, phone, arrival_date, departure_date, count_users,country,status_payment, company, definition,booking,paid,debt, total_payable, comentary, staff, filial,status} = req.body
             const { id } = req.params
 
             const orders = await AppDataSource.getRepository(OrdersEntity).createQueryBuilder().update(OrdersEntity)
-                .set({ rooms, number_night, type_payment, phone, arrival_date, departure_date, count_users,country,status_payment, company, definition,booking,paid,debt, total_payable, comentary, staff, filial})
+                .set({ rooms, number_night, type_payment, phone, arrival_date, departure_date, count_users,country,status_payment, company, definition,booking,paid,debt, total_payable, comentary, staff, filial,status})
                 .where({ id })
                 .returning("*")
                 .execute()
