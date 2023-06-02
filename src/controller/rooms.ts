@@ -19,8 +19,6 @@ class RoomsController {
         }));
     }
 
-
-
     public async GetId(req: Request, res: Response): Promise<void> {
         const { id } = req.params
 

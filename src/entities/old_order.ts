@@ -1,30 +1,25 @@
-import { IsString, isArray} from "class-validator";
+import { IsString} from "class-validator";
 import { Entity, PrimaryGeneratedColumn, Column,CreateDateColumn,UpdateDateColumn, OneToMany, ManyToOne } from "typeorm";
-import { FilialEntity } from "./filials";
-import { RoomsEntity } from "./rooms";
-import { ServicesOrdersEntity } from "./services_orders";
-import { StaffEntity } from "./staff";
-import { UsersEntity } from "./users";
-import { OldOrdersEntity } from "./old_order";
+import { OrdersEntity } from "./orders";
 
 
 
-@Entity({ name: "oders" })
-export class OrdersEntity {
+@Entity({ name: "old_oders" }) 
+export class OldOrdersEntity {
     @PrimaryGeneratedColumn()
     id: number
+
+    @Column({type:"varchar"})
+    @IsString()
+    users: string
+
+    @Column({type:"varchar"})
+    @IsString()
+    rooms:string 
 
     @Column({ type: "varchar", length: 200 })
     @IsString()
     number_night: string
-
-    @Column({ type: "varchar", length: 100 })
-    @IsString()
-    type_payment: string
-
-    @Column({ type: "varchar", length: 100,nullable:true })
-    @IsString()
-    status_payment: string
 
     @Column({ type: "varchar", length: 200,nullable:true })
     @IsString()
@@ -74,6 +69,14 @@ export class OrdersEntity {
     @IsString()
     debt: string
 
+    @Column({ type: "varchar",})
+    @IsString()
+    early_release:string
+
+    @Column({ type: "varchar",})
+    @IsString() 
+    refund:string
+
     @Column({ type: "text",nullable:true })
     @IsString()
     country: string
@@ -82,31 +85,13 @@ export class OrdersEntity {
     @IsString()
     comentary: string
 
-    @Column({ type: "varchar", length: 100, default:"busy" })
-    @IsString()
-    status: string
-
     @CreateDateColumn({ type: "timestamp" })
     createdAt: Date;
 
     @UpdateDateColumn({ type: "timestamp" })
     updateAt: Date;
 
-    @ManyToOne(() => StaffEntity, (staff) => staff.orders)
-    staff: StaffEntity
+    @ManyToOne(() => OrdersEntity, (orders) => orders.old)
+    orders: OrdersEntity
 
-    @OneToMany(() => UsersEntity, (users) => users.orders)
-    users: UsersEntity[]
-
-    @OneToMany(() => OldOrdersEntity, (old) => old.orders)
-    old: OldOrdersEntity[]
-
-    @ManyToOne(()=>RoomsEntity,(rooms)=>rooms.orders)
-    rooms:RoomsEntity
-
-    @ManyToOne(()=>FilialEntity,(filial)=>filial.orders)
-    filial:FilialEntity
-
-    @OneToMany(() => ServicesOrdersEntity, (services_orders) => services_orders.orders)
-    services_orders: ServicesOrdersEntity[]
 }

@@ -12,6 +12,7 @@ import products from "../controller/products";
 import services_orders from "../controller/services_orders";
 import task from "../controller/task";
 import change from "../controller/change";
+import old_orders from "../controller/old_orders";
 
 
 const router=Router()
@@ -114,6 +115,12 @@ router.get("/change/:id",change.GetId);
 router.post("/change",change.Post);
 router.put("/change/:id",change.Put);
 router.delete("/changedelete/:id",change.Delete);
+
+// old orders
+router.get("/oldorders",old_orders.Get)
+router.post("/oldorders",old_orders.Post)
+router.put("/oldorders/:id",old_orders.Put)
+router.delete("/oldorders/:id",old_orders.Delete)
 
 
 
