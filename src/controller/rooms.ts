@@ -5,19 +5,17 @@ import { RoomsEntity } from '../entities/rooms';
 class RoomsController {
     public async Get(req: Request, res: Response): Promise<void> {
         res.json(await AppDataSource.getRepository(RoomsEntity).find({
-            relations: {
-                filial: true,
-                orders:true
-            },order:{id:"ASC"}
+            relations: [
+                'orders','orders.users','filial'
+            ],order:{id:"ASC"}
         }));
     }
 
     public async GetEmpty(req: Request, res: Response): Promise<void> {
         res.json(await AppDataSource.getRepository(RoomsEntity).find({
-            relations: {
-                filial: true,
-                orders:true
-            }, where: { status: "empty" },order:{id:"ASC"}
+            relations: [
+                'orders','orders.users','filial'
+            ], where: { status: "empty" },order:{id:"ASC"}
         }));
     }
 
@@ -27,10 +25,9 @@ class RoomsController {
         const { id } = req.params
 
         res.json(await AppDataSource.getRepository(RoomsEntity).find({
-            relations: {
-                filial: true,
-                orders:true
-            }, where: { id: +id }
+            relations: [
+                'orders','orders.users','filial'
+            ], where: { id: +id }
         }));
     }
 
