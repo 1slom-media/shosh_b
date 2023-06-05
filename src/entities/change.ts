@@ -24,6 +24,22 @@ export class ChangeEntity {
     @Column({ type: "varchar",nullable:true })
     @IsString()
     departure_date: string
+
+    @Column({ type: "varchar",nullable:true })
+    @IsString()
+    cash_flow: string
+
+    @Column({ type: "varchar",nullable:true })
+    @IsString()
+    transfer_exp: string
+
+    @Column({ type: "varchar", nullable:true})
+    @IsString()
+    comentary: string
+
+    @Column({type:"varchar",nullable:true})
+    @IsString()
+    consumption_category:string
  
     @Column({ type: "varchar", length: 100,default:"admin_view"})
     @IsString()
