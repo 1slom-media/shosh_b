@@ -49,9 +49,9 @@ class OrdersController {
     }
 
     public async Post(req: Request, res: Response) {
-        const { rooms, number_night, type_payment, phone, arrival_date, departure_date, count_users,country,status_payment, company, definition,booking,paid,debt, total_payable, comentary, staff, filial,company_details,sale } = req.body
+        const { rooms, number_night, type_payment, phone, arrival_date, departure_date, count_users,country,status_payment, company, definition,booking,paid,debt, total_payable, comentary, staff, filial,company_details,sale,color } = req.body
 
-        const orders = await AppDataSource.getRepository(OrdersEntity).createQueryBuilder().insert().into(OrdersEntity).values({rooms, number_night, type_payment, phone, arrival_date, departure_date, count_users,country,status_payment, company, definition,booking,paid,debt, total_payable, comentary, staff, filial,company_details,sale }).returning("*").execute()
+        const orders = await AppDataSource.getRepository(OrdersEntity).createQueryBuilder().insert().into(OrdersEntity).values({rooms, number_night, type_payment, phone, arrival_date, departure_date, count_users,country,status_payment, company, definition,booking,paid,debt, total_payable, comentary, staff, filial,company_details,sale,color }).returning("*").execute()
 
         res.json({
             status: 201,
@@ -62,11 +62,11 @@ class OrdersController {
 
     public async Put(req: Request, res: Response) {
         try {
-            const { rooms, number_night, type_payment, phone, arrival_date, departure_date, count_users,country,status_payment, company, definition,booking,paid,debt, total_payable, comentary, staff, filial,company_details,sale,status} = req.body
+            const { rooms, number_night, type_payment, phone, arrival_date, departure_date, count_users,country,status_payment, company, definition,booking,paid,debt, total_payable, comentary, staff, filial,company_details,sale,status,color} = req.body
             const { id } = req.params
 
             const orders = await AppDataSource.getRepository(OrdersEntity).createQueryBuilder().update(OrdersEntity)
-                .set({ rooms, number_night, type_payment, phone, arrival_date, departure_date, count_users,country,status_payment, company, definition,booking,paid,debt, total_payable, comentary, staff, filial,company_details,sale,status})
+                .set({ rooms, number_night, type_payment, phone, arrival_date, departure_date, count_users,country,status_payment, company, definition,booking,paid,debt, total_payable, comentary, staff, filial,company_details,sale,status,color})
                 .where({ id })
                 .returning("*")
                 .execute()

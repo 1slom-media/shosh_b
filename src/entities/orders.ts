@@ -86,6 +86,10 @@ export class OrdersEntity {
     @IsString()
     status: string
 
+    @Column({ type: "varchar", default:"#0419fd"})
+    @IsString()
+    color: string
+
     @CreateDateColumn({ type: "timestamp" })
     createdAt: Date;
 
