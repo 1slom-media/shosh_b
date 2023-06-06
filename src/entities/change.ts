@@ -23,6 +23,10 @@ export class ChangeEntity {
 
     @Column({ type: "varchar",nullable:true })
     @IsString()
+    arrival_date: string
+
+    @Column({ type: "varchar",nullable:true })
+    @IsString()
     departure_date: string
 
     @Column({ type: "varchar",nullable:true })
