@@ -105,11 +105,15 @@ class OrdersController {
         try {
             const { id } = req.params
 
-            const orders = await AppDataSource.getRepository(OrdersEntity).createQueryBuilder().delete().from(OrdersEntity).where({ id }).returning("*").execute()
+            const orders = await AppDataSource.getRepository(OrdersEntity).createQueryBuilder().update(OrdersEntity)
+                .set({ status: "deleted" }) 
+                .where({ id })
+                .returning("*")
+                .execute()
 
             res.json({
                 status: 200,
-                message: "orders deleted",
+                message: "orders status update",
                 data: orders.raw[0]
             })
         } catch (error) {
