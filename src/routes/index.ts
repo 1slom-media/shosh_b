@@ -71,6 +71,7 @@ router.get("/orders/:id",orders.GetId);
 router.post("/orders",orders.Post);
 router.put("/orders/:id",orders.Put);
 router.delete("/orders/:id",orders.Delete);
+router.delete("/deleteorders/:id",orders.DeleteOrders)
 
 // users rout
 router.get("/users",users.Get);

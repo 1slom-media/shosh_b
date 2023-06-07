@@ -54,6 +54,6 @@ export class UsersEntity {
     @UpdateDateColumn({ type: "timestamp" })
     updateAt: Date;
 
-    @ManyToOne(() => OrdersEntity, (orders) => orders.users)
+    @ManyToOne(() => OrdersEntity, (orders) => orders.users,{onDelete:"CASCADE",onUpdate:"CASCADE"})
     orders: OrdersEntity
 }

@@ -1,6 +1,7 @@
 import { IsString} from "class-validator";
 import { Entity, PrimaryGeneratedColumn, Column,CreateDateColumn,UpdateDateColumn, OneToMany, ManyToOne } from "typeorm";
 import { OrdersEntity } from "./orders";
+import { ServicesOrdersEntity } from "./services_orders";
 
 
 
@@ -91,7 +92,10 @@ export class OldOrdersEntity {
     @UpdateDateColumn({ type: "timestamp" })
     updateAt: Date;
 
-    @ManyToOne(() => OrdersEntity, (orders) => orders.old)
+    @ManyToOne(() => OrdersEntity, (orders) => orders.old,{onDelete:"CASCADE",onUpdate:"CASCADE"})
     orders: OrdersEntity
+
+    @OneToMany(() => ServicesOrdersEntity, (services_orders) => services_orders.old,{onDelete:"CASCADE",onUpdate:"CASCADE"})
+    services_orders: ServicesOrdersEntity[]
 
 }

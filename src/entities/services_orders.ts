@@ -3,6 +3,7 @@ import { Entity, PrimaryGeneratedColumn, Column,CreateDateColumn,UpdateDateColum
 import { OrdersEntity } from "./orders";
 import { ProductsEntity } from "./products";
 import { ServicesEntity } from "./services";
+import { OldOrdersEntity } from "./old_order";
 
 
 @Entity({ name: "services_orders" })
@@ -36,12 +37,15 @@ export class ServicesOrdersEntity {
     @UpdateDateColumn({ type: "timestamp" })
     updateAt: Date;
 
-    @ManyToOne(()=>OrdersEntity,(orders)=>orders.services_orders,)
+    @ManyToOne(()=>OrdersEntity,(orders)=>orders.services_orders,{onDelete:"CASCADE",onUpdate:"CASCADE"})
     orders:OrdersEntity
 
-    @ManyToOne(()=>ProductsEntity,(products)=>products.services_orders,{nullable:true})
+    @ManyToOne(()=>OldOrdersEntity,(old)=>old.services_orders,{onDelete:"CASCADE",onUpdate:"CASCADE"})
+    old:OldOrdersEntity
+
+    @ManyToOne(()=>ProductsEntity,(products)=>products.services_orders,{nullable:true,onDelete:"CASCADE",onUpdate:"CASCADE"})
     products:ProductsEntity
 
-    @ManyToOne(()=>ServicesEntity,(services)=>services.services_orders,)
+    @ManyToOne(()=>ServicesEntity,(services)=>services.services_orders,{onDelete:"CASCADE",onUpdate:"CASCADE"})
     services:ServicesEntity
 }

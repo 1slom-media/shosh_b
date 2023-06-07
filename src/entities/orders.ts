@@ -86,6 +86,10 @@ export class OrdersEntity {
     @IsString()
     status: string
 
+    @Column({ type: "varchar", length: 100, default:"active" })
+    @IsString()
+    status_client: string
+
     @Column({ type: "varchar", default:"#0419fd"})
     @IsString()
     color: string
@@ -99,10 +103,10 @@ export class OrdersEntity {
     @ManyToOne(() => StaffEntity, (staff) => staff.orders)
     staff: StaffEntity
 
-    @OneToMany(() => UsersEntity, (users) => users.orders)
+    @OneToMany(() => UsersEntity, (users) => users.orders,{onDelete:"CASCADE",onUpdate:"CASCADE"})
     users: UsersEntity[]
 
-    @OneToMany(() => OldOrdersEntity, (old) => old.orders)
+    @OneToMany(() => OldOrdersEntity, (old) => old.orders,{onDelete:"CASCADE",onUpdate:"CASCADE"})
     old: OldOrdersEntity[]
 
     @ManyToOne(()=>RoomsEntity,(rooms)=>rooms.orders)
@@ -111,6 +115,6 @@ export class OrdersEntity {
     @ManyToOne(()=>FilialEntity,(filial)=>filial.orders)
     filial:FilialEntity
 
-    @OneToMany(() => ServicesOrdersEntity, (services_orders) => services_orders.orders)
+    @OneToMany(() => ServicesOrdersEntity, (services_orders) => services_orders.orders,{onDelete:"CASCADE",onUpdate:"CASCADE"})
     services_orders: ServicesOrdersEntity[]
 }
