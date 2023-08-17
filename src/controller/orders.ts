@@ -13,7 +13,7 @@ class OrdersController {
                 'staff',
                 'filial',
                 'old'
-            ],order:{id:"ASC"}
+            ], order: { id: "ASC" }
         }));
     }
 
@@ -27,7 +27,7 @@ class OrdersController {
                 'staff',
                 'filial',
                 'old'
-            ],order:{id:"ASC"},
+            ], order: { id: "ASC" },
             where: { status: "busy" }
         }));
     }
@@ -49,9 +49,9 @@ class OrdersController {
     }
 
     public async Post(req: Request, res: Response) {
-        const { rooms, number_night, type_payment, phone, arrival_date, departure_date, count_users,country,status_payment, company, definition,booking,paid,debt, total_payable, comentary, staff, filial,company_details,sale,color,status_client } = req.body
+        const { rooms, number_night, type_payment, phone, arrival_date, departure_date, count_users, country, status_payment, company, definition, booking, paid, debt, total_payable, comentary, staff, filial, company_details, sale, color, status_client } = req.body
 
-        const orders = await AppDataSource.getRepository(OrdersEntity).createQueryBuilder().insert().into(OrdersEntity).values({rooms, number_night, type_payment, phone, arrival_date, departure_date, count_users,country,status_payment, company, definition,booking,paid,debt, total_payable, comentary, staff, filial,company_details,sale,color,status_client }).returning("*").execute()
+        const orders = await AppDataSource.getRepository(OrdersEntity).createQueryBuilder().insert().into(OrdersEntity).values({ rooms, number_night, type_payment, phone, arrival_date, departure_date, count_users, country, status_payment, company, definition, booking, paid, debt, total_payable, comentary, staff, filial, company_details, sale, color, status_client }).returning("*").execute()
 
         res.json({
             status: 201,
@@ -62,11 +62,11 @@ class OrdersController {
 
     public async Put(req: Request, res: Response) {
         try {
-            const { rooms, number_night, type_payment, phone, arrival_date, departure_date, count_users,country,status_payment, company, definition,booking,paid,debt, total_payable, comentary, staff, filial,company_details,sale,status,color,status_client} = req.body
+            const { rooms, number_night, type_payment, phone, arrival_date, departure_date, count_users, country, status_payment, company, definition, booking, paid, debt, total_payable, comentary, staff, filial, company_details, sale, status, color, status_client } = req.body
             const { id } = req.params
 
             const orders = await AppDataSource.getRepository(OrdersEntity).createQueryBuilder().update(OrdersEntity)
-                .set({ rooms, number_night, type_payment, phone, arrival_date, departure_date, count_users,country,status_payment, company, definition,booking,paid,debt, total_payable, comentary, staff, filial,company_details,sale,status,color,status_client})
+                .set({ rooms, number_night, type_payment, phone, arrival_date, departure_date, count_users, country, status_payment, company, definition, booking, paid, debt, total_payable, comentary, staff, filial, company_details, sale, status, color, status_client })
                 .where({ id })
                 .returning("*")
                 .execute()
@@ -106,7 +106,7 @@ class OrdersController {
             const { id } = req.params
 
             const orders = await AppDataSource.getRepository(OrdersEntity).createQueryBuilder().update(OrdersEntity)
-                .set({ status: "deleted" }) 
+                .set({ status: "deleted" })
                 .where({ id })
                 .returning("*")
                 .execute()
@@ -114,6 +114,22 @@ class OrdersController {
             res.json({
                 status: 200,
                 message: "orders status update",
+                data: orders.raw[0]
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    public async DeleteOrdersFull(req: Request, res: Response) {
+        try {
+            const { id } = req.params
+
+            const orders = await AppDataSource.getRepository(OrdersEntity).createQueryBuilder().delete().from(OrdersEntity).where({ id }).returning("*").execute()
+
+            res.json({
+                status: 200,
+                message: "orderss deleted",
                 data: orders.raw[0]
             })
         } catch (error) {
